@@ -6,8 +6,7 @@
 from typing import *
 from math import *
 
-# @lc code=start
-class Solution:
+class Solution0:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         m, n = len(nums1), len(nums2)
 
@@ -21,7 +20,6 @@ class Solution:
 
                 if k1 < m:
                     v1 = nums1[k1]
-                    # step1 = step + (1 if step != 1 else 0)
                     step1 = step
                 else:
                     if l1 < m:
@@ -32,7 +30,6 @@ class Solution:
                         step1 = 0
                 if k2 < n:
                     v2 = nums2[k2]
-                    # step2 = step + (1 if step != 1 else 0)
                     step2 = step
                 else:
                     if l2 < n:
@@ -66,10 +63,32 @@ class Solution:
             return (find_kth(0, 0, tmp) +
                     find_kth(0, 0, tmp + 1)) / 2
 
-        
+# @lc code=start
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        m, n = len(nums1), len(nums2)
+        if m > n:
+            return self.findMedianSortedArrays(nums2, nums1)
+
+        INF = float("inf")
+        median1, median2 = 0, 0
+        l, r = 0, m
+        while l <= r:
+            i = (l + r) >> 1
+            j = ((m + n + 1) >> 1) - i
+
+            a_i = nums1[i] if i < m else INF
+            a_im1 = nums1[i - 1] if i - 1 >= 0 else -INF
+            b_j = nums2[j] if j < n else INF
+            b_jm1 = nums2[j - 1] if j - 1 >= 0 else -INF
+
+            if a_im1 <= b_j:
+                median1, median2 = max(a_im1, b_jm1), min(a_i, b_j)
+                l = i + 1
+            else:
+                r = i - 1
+        return (median1 + median2) / 2 if ((m + n) & 1) == 0 else median1
 # @lc code=end
-# 1,2,2,3,4,5
-# 1,3,5  2,4,6
 
 s = Solution()
 print(s.findMedianSortedArrays([1,3], [2]))
