@@ -23,6 +23,9 @@ class Solution0:
 
         return dfs(0, 0)
     
+# 状态转移方程（不考虑边界）为dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+# 转换成滚动数组后，dp本身在下一行为dp[i - 1][:]，不用两个1维数组。
+
 # @lc code=start
 class Solution:
     MAX = 80000000
