@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
     /* Compile */
 
     char* gcc_argv[] = { "/usr/bin/gcc", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", "print_utils.c", argv[1], "-o", "/dev/shm/solution.so", NULL };
+    int status;
     pid_t pid = fork();
 
     if (!pid) {
@@ -29,7 +30,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    waitpid(pid, NULL, 0);
+    waitpid(pid, &status, 0);
+    if ((!WIFEXITED(status)) || WEXITSTATUS(status) != 0) {
+        puts("gcc compile failed.");
+        return 1;
+    }
 
     /* Run */
 
