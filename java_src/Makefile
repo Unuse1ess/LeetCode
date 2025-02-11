@@ -1,8 +1,8 @@
 CodeRunner.jar: clean
-	mkdir target
-	javac -d target CodeRunner.java
-	jar cvmf manifest CodeRunner.jar -C target/ .
+	mkdir /dev/shm/target
+	javac -d /dev/shm/target CodeRunner.java
+	jar cvmf manifest CodeRunner.jar -C /dev/shm/target/ .
 
 clean:
-	rm -rf target CodeRunner.jar
+	rm -rf /dev/shm/target CodeRunner.jar
 	

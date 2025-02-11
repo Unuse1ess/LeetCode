@@ -1,11 +1,15 @@
 /*
     ComPile and Run
     Compile and run program for LeetCode written in C/C++.
+
+    This file is compiled with:
+
+        gcc -fsanitize=address -O2 cpr.c -o cpr
 */
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include<dlfcn.h>
+#include <dlfcn.h>
 #include <stdio.h>
 
 int main(int argc, char** argv) {
@@ -16,7 +20,7 @@ int main(int argc, char** argv) {
 
     /* Compile */
 
-    char* gcc_argv[] = { "/usr/bin/gcc", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", argv[1], "-o", "./solution.so", NULL };
+    char* gcc_argv[] = { "/usr/bin/gcc", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", "print_utils.c", argv[1], "-o", "/dev/shm/solution.so", NULL };
     pid_t pid = fork();
 
     if (!pid) {
@@ -33,7 +37,7 @@ int main(int argc, char** argv) {
     void (*test)();
     char* error;
 
-    if ((handle = dlopen("./solution.so", RTLD_LAZY)) == NULL) {
+    if ((handle = dlopen("/dev/shm/solution.so", RTLD_LAZY)) == NULL) {
         puts("dlopen() error.");
         return 1;
     }
@@ -41,6 +45,7 @@ int main(int argc, char** argv) {
     test = dlsym(handle, "test");
     if ((error = dlerror()) != NULL) {
         puts("dlsym() error.");
+        dlclose(handle);
         return 1;
     }
 
