@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "print_utils.h"
+
 // @lc code=start
 /**
  * Note: The returned array must be malloced, assume caller calls free().
@@ -37,22 +39,15 @@ int* productExceptSelf(int* nums, int numsSize, int* returnSize) {
 }
 // @lc code=end
 
-void print(int* nums, int numsSize) {
-    for (int i = 0; i < numsSize; i++) {
-        printf("%d ", nums[i]);
-    }
-    printf("\n");
-}
-
 void test() {
     int* ret;
     int ret_num_size;
 
     int nums[] = { 1, 2, 3, 4 };
-    print(ret = productExceptSelf(nums, 4, &ret_num_size), 4);
+    print_arr(ret = productExceptSelf(nums, 4, &ret_num_size), 4, INT_TYPE);
     free(ret);
 
     int nums2[] = { -1, 1, 0, -3, 3 };
-    print(ret = productExceptSelf(nums2, 5, &ret_num_size), 5);
+    print_arr(ret = productExceptSelf(nums2, 5, &ret_num_size), 5, INT_TYPE);
     free(ret);
 }

@@ -5,6 +5,7 @@
  */
 
 #include <stdbool.h>
+#include "print_utils.h"
 
 // @lc code=start
 bool increasingTriplet(int* nums, int numsSize) {
@@ -28,5 +29,12 @@ bool increasingTriplet(int* nums, int numsSize) {
 // @lc code=end
 
 void test() {
+    int nums1[] = { 1, 2, 3, 4, 5 };
+    print_bool(increasingTriplet(nums1, 5));
 
+    int nums2[] = { 5, 4, 3, 2, 1 };
+    print_bool(increasingTriplet(nums2, 5));
+
+    int nums3[] = { 2, 1, 5, 0, 4, 6 };
+    print_bool(increasingTriplet(nums3, 6));
 }
