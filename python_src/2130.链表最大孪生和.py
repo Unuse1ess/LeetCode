@@ -26,13 +26,7 @@ class ListNode:
 
     __repr__ = __str__
 
-# @lc code=start
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution:
+class Solution0:
     def pairSum(self, head: Optional[ListNode]) -> int:
         p1, p2 = head, head
         lst = []
@@ -54,6 +48,35 @@ class Solution:
 
         return ret
         
+# @lc code=start
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        p1, p2 = head, head
+        prev = None
+        while p2.next and p2.next.next:
+            p2 = p2.next.next
+
+            nxt = p1.next
+            p1.next = prev
+            prev = p1
+            p1 = nxt
+
+        p2 = p1.next
+        p1.next = prev
+
+        ret = 0
+        while p2:
+            tmp = p1.val + p2.val
+            if tmp > ret: ret = tmp
+            p1 = p1.next
+            p2 = p2.next
+
+        return ret
 # @lc code=end
 
 s = Solution()
