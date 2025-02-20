@@ -5,7 +5,7 @@
  */
 
 #include <stdbool.h>
-#include "print_utils.h"
+#include "utils.h"
 
 // @lc code=start
 bool increasingTriplet(int* nums, int numsSize) {

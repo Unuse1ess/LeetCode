@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "print_utils.h"
+#include "utils.h"
 
 // @lc code=start
 bool isSubsequence(char* s, char* t) {

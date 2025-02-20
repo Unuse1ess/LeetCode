@@ -4,7 +4,7 @@
  * [11] 盛最多水的容器
  */
 #include <math.h>
-#include "print_utils.h"
+#include "utils.h"
 
 // @lc code=start
 #define max(a, b) ((a) > (b) ? (a) : (b))

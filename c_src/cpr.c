@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
     /* Compile */
 
-    char* gcc_argv[] = { "/usr/bin/gcc", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", "print_utils.c", argv[1], "-o", "/dev/shm/solution.so", NULL };
+    char* gcc_argv[] = { "/usr/bin/gcc", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", "utils.c", argv[1], "-o", "/dev/shm/solution.so", NULL };
     int status;
     pid_t pid = fork();
 
