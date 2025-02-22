@@ -26,6 +26,9 @@ class TreeNode:
 
     def __repr__(self):
         return str(self)
+
+    __hash__ = object.__hash__
+
     @staticmethod
     def create(l: List[int | None]) -> "TreeNode":
         if len(l) == 0:
