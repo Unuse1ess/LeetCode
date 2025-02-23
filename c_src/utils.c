@@ -1,6 +1,5 @@
 /*
     Printing library for Leetcode written in C.
-    This file is compiled with:
 */
 
 #include <stdio.h>
