@@ -4,11 +4,12 @@
  * [236] 二叉树的最近公共祖先
  */
 #include <iostream>
+#include <unordered_map>
+#include <unordered_set>
 #include "utils.hpp"
 
 using namespace std;
 
-// @lc code=start
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -18,7 +19,7 @@ using namespace std;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution {
+class Solution0 {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         vector<TreeNode*> path, p_path, q_path;
@@ -49,6 +50,48 @@ public:
         path.pop_back();
     }
 };
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        unordered_map<int, TreeNode*> parent;
+        dfs(root, parent);
+        parent[root->val] = nullptr;
+
+        unordered_set<int> visited;
+        TreeNode* tmp = p;
+        while (tmp != nullptr) {
+            visited.insert(tmp->val);
+            tmp = parent[tmp->val];
+        }
+        tmp = q;
+        while (visited.find(tmp->val) == visited.end()) {
+            tmp = parent[tmp->val];
+        }
+        return tmp;
+    }
+
+    void dfs(TreeNode* root, unordered_map<int, TreeNode*>& parent) {
+        if (root->left) {
+            parent[root->left->val] = root;
+            dfs(root->left, parent);
+        }
+        if (root->right) {
+            parent[root->right->val] = root;
+            dfs(root->right, parent);
+        }
+    }
+};
+
 // @lc code=end
 
 void test() {
