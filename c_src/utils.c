@@ -36,6 +36,7 @@ struct TreeNode* create_tree(char** data, size_t N) {
 }
 
 void print_tree(struct TreeNode* root) {
+    /* Assume that the input size <= 128 */
     static struct TreeNode* queue[128] = { NULL };
 
     size_t queue_l = 0, queue_r = 0;
@@ -46,7 +47,7 @@ void print_tree(struct TreeNode* root) {
     }
 
     queue[queue_r++] = root;
-    while (queue_l < queue_r && queue_r < 128) {
+    while (queue_l < queue_r) {
         struct TreeNode* node = queue[queue_l++];
         if (node) {
             queue[queue_r++] = node->left;
@@ -54,6 +55,7 @@ void print_tree(struct TreeNode* root) {
         }
     }
     queue_l = 0;
+    queue_r--;
     while (queue[queue_r] == NULL)
         queue_r--;
 
