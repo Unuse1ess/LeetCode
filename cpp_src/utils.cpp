@@ -7,8 +7,6 @@
     determined template type is not compiled)
 */
 
-#include <iostream>
-#include <vector>
 #include <cstring>
 #include "utils.hpp"
 
@@ -33,22 +31,28 @@ TreeNode* TreeNode::create_tree(vector<const char*>& data) {
     if (data.size() == 0) {
         return nullptr;
     }
-    TreeNode* tree = new TreeNode[data.size()];
-    TreeNode* root = tree;
-
+    TreeNode* root = new TreeNode[data.size()];
+    queue<TreeNode*> q;
+    q.push(root);
     root->val = atoi(data[0]);
-    root->left = root->right = nullptr;
 
-    for (size_t i = 1; i < data.size(); i++) {
+    for (size_t i = 1; i < data.size(); i += 2) {
+        TreeNode* node = q.front();
+        q.pop();
+
         if (strncmp(data[i], "null", 4)) {
-            if (i & 1)
-                tree[((i + 1) >> 1) - 1].left = &tree[i];
-            else
-                tree[((i + 1) >> 1) - 1].right = &tree[i];
-
-            tree[i].val = atoi(data[i]);
-            tree[i].left = tree[i].right = nullptr;
+            node->left = &root[i];
+            root[i].val = atoi(data[i]);
         }
+        if (i + 1 < data.size() && strncmp(data[i + 1], "null", 4)) {
+            node->right = &root[i + 1];
+            root[i + 1].val = atoi(data[i + 1]);
+        }
+
+        if (node->left)
+            q.push(node->left);
+        if (node->right)
+            q.push(node->right);
     }
 
     return root;

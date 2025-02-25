@@ -12,26 +12,39 @@
 static char float_fstring[128] = "%.4f";
 static char* bool_string[] = { "false", "true" };
 
+/*
+** IMPORTANT **
+    Bugs founded and fixed in C++, and migrated from C++.
+    Not tested in C.
+*/
 struct TreeNode* create_tree(char** data, size_t N) {
+    /* Assume that the input size <= 128 */
+    static struct TreeNode* queue[128] = { NULL };
+
     if (N == 0) return NULL;
-    struct TreeNode* tree = (struct TreeNode*)malloc(sizeof(struct TreeNode) * N);
-    struct TreeNode* root = tree;
 
+    struct TreeNode* root = (struct TreeNode*)malloc(sizeof(struct TreeNode) * N);
+    size_t queue_l = 0, queue_r = 0;
+
+    queue[queue_r++] = root;
     root->val = atoi(data[0]);
-    root->left = root->right = NULL;
 
-    for (size_t i = 1; i < N; i++) {
+    for (size_t i = 1; i < N; i += 2) {
+        struct TreeNode* node = queue[queue_l++];
         if (strncmp(data[i], "null", 4)) {
-            if (i & 1)
-                tree[((i + 1) >> 1) - 1].left = &tree[i];
-            else
-                tree[((i + 1) >> 1) - 1].right = &tree[i];
-
-            tree[i].val = atoi(data[i]);
-            tree[i].left = tree[i].right = NULL;
+            node->left = &root[i];
+            root[i].val = atoi(data[i]);
         }
-    }
+        if (i + 1 < N && strncmp(data[i + 1], "null", 4)) {
+            node->right = &root[i + 1];
+            root[i + 1].val = atoi(data[i + 1]);
+        }
 
+        if (node->left)
+            queue[queue_r++] = node->left;
+        if (node->right)
+            queue[queue_r++] = node->right;
+    }
     return root;
 }
 

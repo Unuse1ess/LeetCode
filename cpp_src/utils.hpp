@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+#include <functional>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -20,7 +22,7 @@ public:
 
 
 std::ostream& operator<<(std::ostream& os, const std::vector<int>& v);
-std::ostream& operator<<(std::ostream& os, const TreeNode* _root);
+std::ostream& operator<<(std::ostream& os, const TreeNode* root);
 
 
 extern "C" {
