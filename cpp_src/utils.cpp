@@ -16,6 +16,9 @@ using namespace std;
 
 
 ostream& operator<<(ostream& os, const vector<int>& v) {
+    if (v.size() == 0) {
+        return os << "[]";
+    }
     os << "[";
     for (size_t i = 0; i < v.size(); i++) {
         os << v[i] << ", ";
