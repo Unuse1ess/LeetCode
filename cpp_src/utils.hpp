@@ -7,6 +7,7 @@
 #include <unordered_set>
 #include <queue>
 #include <deque>
+#include <bitset>
 #include <iostream>
 
 struct TreeNode {
