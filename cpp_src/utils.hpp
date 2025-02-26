@@ -24,6 +24,7 @@ public:
 
 
 std::ostream& operator<<(std::ostream& os, const std::vector<int>& v);
+std::ostream& operator<<(std::ostream& os, const std::vector<double>& v);
 std::ostream& operator<<(std::ostream& os, const TreeNode* root);
 
 

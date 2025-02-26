@@ -22,9 +22,19 @@ ostream& operator<<(ostream& os, const vector<int>& v) {
         os << v[i] << ", ";
     }
 
-    os << "\b\b]";
+    return os << "\b\b]";
+}
 
-    return os;
+ostream& operator<<(ostream& os, const vector<double>& v) {
+    if (v.size() == 0) {
+        return os << "[]";
+    }
+    os << "[";
+    for (size_t i = 0; i < v.size(); i++) {
+        os << v[i] << ", ";
+    }
+
+    return os << "\b\b]";
 }
 
 TreeNode* TreeNode::create_tree(vector<const char*>& data) {
@@ -100,7 +110,5 @@ ostream& operator<<(ostream& os, const TreeNode* root) {
             os << "null, ";
         }
     }
-    os << "\b\b]";
-
-    return os;
+    return os << "\b\b]";
 }
