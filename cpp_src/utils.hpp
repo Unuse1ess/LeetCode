@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <algorithm>
 #include <functional>
 #include <vector>
@@ -8,6 +9,7 @@
 #include <queue>
 #include <deque>
 #include <bitset>
+#include <memory>
 #include <iostream>
 
 struct TreeNode {
