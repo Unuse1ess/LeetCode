@@ -4,38 +4,14 @@
     ** IMPORTANT **
     Do not use template, because this file is compiled to a DLL
     (the ELF loader cannot find the template symbol since the
-    determined template type is not compiled)
+    determined template type is not compiled).
+    Use it in header file (utils.hpp).
 */
 
 #include <cstring>
 #include "utils.hpp"
 
 using namespace std;
-
-
-ostream& operator<<(ostream& os, const vector<int>& v) {
-    if (v.size() == 0) {
-        return os << "[]";
-    }
-    os << "[";
-    for (size_t i = 0; i < v.size(); i++) {
-        os << v[i] << ", ";
-    }
-
-    return os << "\b\b]";
-}
-
-ostream& operator<<(ostream& os, const vector<double>& v) {
-    if (v.size() == 0) {
-        return os << "[]";
-    }
-    os << "[";
-    for (size_t i = 0; i < v.size(); i++) {
-        os << v[i] << ", ";
-    }
-
-    return os << "\b\b]";
-}
 
 TreeNode* TreeNode::create_tree(vector<const char*>& data) {
     if (data.size() == 0) {
