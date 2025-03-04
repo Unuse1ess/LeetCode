@@ -41,6 +41,10 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
     return os << "\b\b]";
 }
 
+template<typename T1, typename T2 = T1>
+std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& p) {
+    return os << "(" << p.first << ", " << p.second << ")";
+}
 
 extern "C" {
     void test();
