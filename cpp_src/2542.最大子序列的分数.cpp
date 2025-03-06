@@ -43,6 +43,9 @@ public:
     }
 };
 
+/*
+先给nums2排序（从大到小），再根据nums2遍历对应的nums1，给nums1中的值维护大小为k的小根堆。
+*/
 // @lc code=start
 class Solution {
 public:
