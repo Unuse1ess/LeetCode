@@ -16,24 +16,11 @@ public:
         sort(potions.begin(), potions.end());
 
         for (size_t i = 0; i < spells.size(); i++) {
-            ans[i] = bi_search(potions, (uint64_t)ceil((double)success / (double)spells[i]));
+            auto p = lower_bound(potions.begin(), potions.end(), (long long)ceil((double)success / (double)spells[i]));
+            ans[i] = potions.end() - p;
         }
 
         return ans;
-    }
-
-    int bi_search(vector<int>& v, uint64_t target) {
-        int l = 0, r = (int)v.size() - 1;
-        while (l <= r) {
-            int mid = (l + r) >> 1;
-            if ((uint64_t)v[mid] < target) {
-                l = mid + 1;
-            } else {
-                r = mid - 1;
-            }
-        }
-
-        return (int)v.size() - l;
     }
 };
 // @lc code=end
