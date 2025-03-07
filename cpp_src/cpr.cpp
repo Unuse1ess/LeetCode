@@ -4,7 +4,7 @@
 
     This file is compiled with:
 
-        g++ -std=c++23 -fsanitize=address -O2 cpr.cpp -o cpr
+        g++ -std=c++23 -fsanitize=address -fsanitize=undefined -O2 cpr.cpp -o cpr
 */
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
     /* Compile */
 
-    const char* gcc_argv[] = { "/usr/bin/g++", "-std=c++23", "-fsanitize=address", "-Wall", "-g", "-fPIC", "-shared", "utils.cpp", argv[1], "-o", "/dev/shm/solution.so", NULL };
+    const char* gcc_argv[] = { "/usr/bin/g++", "-std=c++23", "-fsanitize=address", "-fsanitize=undefined", "-Wall", "-g", "-fPIC", "-shared", "utils.cpp", argv[1], "-o", "/dev/shm/solution.so", NULL };
     int status;
     pid_t pid = fork();
 
